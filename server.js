@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 const user_api = require('./server/routes/user_api');
 const photo_api = require('./server/routes/photo_api');
 //port number
-const port = 3000;
+//const port = 3000;
 const app = express();
 
 //cors middleware
@@ -34,6 +34,9 @@ app.get('*',(req,res) => {
     res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 // start server
-app.listen(port, function(){
+/* app.listen(port, function(){
     console.log("server running on localhost:" +port);
+}); */
+app.listen(process.env.PORT || 3000, function(){
+  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 });
