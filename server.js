@@ -14,8 +14,8 @@ const app = express();
 //cors middleware
 app.use(cors());
 
-//app.use(express.static(path.join(__dirname, 'dist')));
-app.use(express.static('static'));
+app.use(express.static(path.join(__dirname, 'dist')));
+
 app.use(bodyParser.urlencoded({extended: false}));
 
 //body parser middleware
