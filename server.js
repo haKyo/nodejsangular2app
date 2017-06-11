@@ -31,7 +31,7 @@ app.use('/photo_api',photo_api);
 
 //index route
 app.get('*',(req,res) => {
-    res.sendFile(path.join(__dirname, 'public/index.html'));
+    res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
 // start server
 /* app.listen(port, function(){
