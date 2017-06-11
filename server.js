@@ -14,7 +14,7 @@ const app = express();
 //cors middleware
 app.use(cors());
 
-app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(bodyParser.urlencoded({extended: false}));
 
@@ -32,7 +32,7 @@ app.use('/photo_api',photo_api);
 
 //index route
 app.get('*',(req,res) => {
-    res.sendFile(path.join(__dirname, 'dist/index.html'));
+    res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 // start server
 /* app.listen(port, function(){
