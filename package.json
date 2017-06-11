@@ -8,10 +8,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    
-   
-    "postinstall": "ng build" // referencing the "build" script above
+    "e2e": "ng e2e"
   },
   "engine": {
     "node": "6.10.1",
