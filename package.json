@@ -8,11 +8,14 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "build": "webpack --config ./config/webpack.config.js --progress --colors",
+    "start": "node server.js",
+    "postinstall": "npm run build" // referencing the "build" script above
   },
-  "engine":{
-      "node":"6.10.1",
-      "npm":"5.0.3"
+  "engine": {
+    "node": "6.10.1",
+    "npm": "5.0.3"
   },
   "private": true,
   "dependencies": {
