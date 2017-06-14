@@ -16,4 +16,11 @@ export class ValidateService {
         const re = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
         return re.test(email);
     }
+    validatePostPhoto(photo){
+        if(photo.caption == undefined || photo.image_path == undefined ){
+            return false;
+        }else {
+            return true;
+        }
+    }
 }

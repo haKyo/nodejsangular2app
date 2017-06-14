@@ -27,7 +27,7 @@
 	<div class="row" style="padding-top: 80px">
 		<div id="information" class="col-md-12">
 			<div class="col-md-1 col-md-offset-3 col-xs-1 col-md-offset-3 thumbnail" id="image" style="border: none">
-				<img src="https://scontent.fhan4-1.fna.fbcdn.net/v/t1.0-1/12931123_839198312892075_3253197630212439499_n.jpg?oh=3457e368ac07a680276af4b2f6ff821a&oe=593C73EC"
+				<img [src]="user.avatar"
 				 alt="anhdaidien" class="img-circle">
 			</div>
 			<div class="col-md-8 col-xs-8" id="information">
@@ -49,26 +49,13 @@
 	<!-- /information -->
 
 	<!-- image frame -->
-	<div class="row">
-		<div id="image" style="padding-top: 100px" class="col-md-12">
-			<div class="col-md-2 col-md-offset-3 thumbnail" style="border: none;"><img src="https://cdn.pixabay.com/photo/2015/04/30/20/45/dog-747460_960_720.jpg" alt="..." class="img-thumbnail"></div>
-			<div class="col-md-2 thumbnail" style="border: none;"><img src="https://cdn.pixabay.com/photo/2015/04/30/20/45/dog-747460_960_720.jpg" alt="..." class="img-thumbnail"></div>
-			<div class="col-md-2 thumbnail" style="border: none;"><img src="https://cdn.pixabay.com/photo/2015/04/30/20/45/dog-747460_960_720.jpg" alt="..." class="img-thumbnail"></div>
-			<div class="col-md-3 thumbnail" style="border: none;"></div>
-		</div>
+	<div class="container">
+		<ul id="image" style="padding-top: 100px" class="col-md-12">
+			<li *ngFor="let photo of photos" >
+				<div  class="col-md-2 thumbnail" style="border: solid;padding: 5px; margin: 5px"><img [src]="photo.image_path"></div>
+			</li>
+		</ul>
 	</div>
-	<div class="row">
-		<div id="image" style="padding-top: 100px" class="col-md-12">
-			<div class="col-md-2 col-md-offset-3 thumbnail" style="border: none;"><img src="https://cdn.pixabay.com/photo/2015/04/30/20/45/dog-747460_960_720.jpg" alt="..." class="img-thumbnail"></div>
-			<div class="col-md-2 thumbnail" style="border: none;"><img src="https://cdn.pixabay.com/photo/2015/04/30/20/45/dog-747460_960_720.jpg" alt="..." class="img-thumbnail"></div>
-			<div class="col-md-2 thumbnail" style="border: none;"><img src="https://cdn.pixabay.com/photo/2015/04/30/20/45/dog-747460_960_720.jpg" alt="..." class="img-thumbnail"></div>
-			<div class="col-md-3 thumbnail" style="border: none;"></div>
-		</div>
-	</div>
-
 	<!-- /image frame -->
-	<div class="row">
-		<div class="text-center"><a href="#" style="font-size: 20px">view more</a></div>
-	</div>
 	<!-- /container -->
 </div>

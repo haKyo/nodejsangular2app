@@ -21,6 +21,7 @@ export class RegisterComponent implements OnInit {
   phone: String;
   gender: String;
   personal_information: String;
+  avatar: String;
 
   constructor(private _userService: UserService,
     private router: Router,
@@ -41,7 +42,8 @@ export class RegisterComponent implements OnInit {
       nickname: this.nickname,
       phone: this.phone,
       gender: this.gender,
-      personal_information: this.personal_information
+      personal_information: this.personal_information,
+      avatar: this.avatar
     }
     // require fields
     if (!this.validateService.validateRegister(user)) {
@@ -64,10 +66,7 @@ export class RegisterComponent implements OnInit {
       }
     });
   }
-
-  goToHomePage() {
+  goToLoginPage() {
     this.router.navigate(['/']);
   }
-
-
 }

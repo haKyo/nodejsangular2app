@@ -11,6 +11,8 @@ const userSchema = new Schema({
    phone: String,
    gender: String,
    personal_information: String,
+   profile_picture: String,
+   avatar: String
 });
 
 var user = module.exports = mongoose.model('user',userSchema,'users');

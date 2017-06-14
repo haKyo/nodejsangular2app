@@ -41,16 +41,19 @@ router.get('/users/:id', function (req, res) {
 // register
 router.post('/register', function (req, res, next) {
     console.log('post a user');
-    var newUser = new User();
-    newUser.username = req.body.username;
-    newUser.userpassword = req.body.userpassword;
-    newUser.useremail = req.body.useremail;
-    newUser.gender = req.body.gender;
-    newUser.personal_information = req.body.personal_information;
-    newUser.nickname = req.body.nickname;
-    newUser.phone = req.body.phone;
-    newUser.fullname = req.body.fullname;
-
+    var newUser = new User({
+       username : req.body.username,
+    userpassword : req.body.userpassword,
+   useremail : req.body.useremail,
+   gender : req.body.gender,
+    personal_information : req.body.personal_information,
+    nickname : req.body.nickname,
+phone : req.body.phone,
+    fullname : req.body.fullname,
+    avatar: req.body.avatar
+    });
+   
+    
     User.addUser(newUser, function (err, user) {
         if (err) {
             res.json({ success: false, msg: 'failed to register user' });

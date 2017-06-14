@@ -33,7 +33,11 @@
       <label>Personal Information</label>
       <input type="text" class="form-control" placeholder="Phone Number" name="personal_information" [(ngModel)]="personal_information">
     </div>
+    <div class="form-group">
+      <label>Avatar link</label>
+      <input type="text" class="form-control" placeholder="Avatar" name="avatar" [(ngModel)]="avatar">
+    </div>
     <button type="submit" class="btn btn-default">Submit</button>
-    <button type="button" class="btn btn-default" (click)="goToHomePage()">Cancel</button>
+    <button type="button" class="btn btn-default" (click)="goToLoginPage()">Cancel</button>
   </form>
 </div>
