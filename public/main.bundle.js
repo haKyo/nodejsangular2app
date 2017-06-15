@@ -73,7 +73,7 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(152);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(154);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__login_login_component__ = __webpack_require__(159);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__home_home_component__ = __webpack_require__(158);
@@ -82,12 +82,12 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__searching_and_explore_searching_and_explore_component__ = __webpack_require__(163);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__post_post_component__ = __webpack_require__(160);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__register_register_component__ = __webpack_require__(162);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_app_user_service__ = __webpack_require__(91);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_app_user_service__ = __webpack_require__(63);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_app_photo_service__ = __webpack_require__(46);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_app_validate_service__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_app_validate_service__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16_angular2_flash_messages__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16_angular2_flash_messages___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_16_angular2_flash_messages__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17_app_auth_service__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17_app_auth_service__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18_app_auth_guard__ = __webpack_require__(156);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -190,8 +190,8 @@ AppModule = __decorate([
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_auth_service__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_auth_service__ = __webpack_require__(26);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthGuard; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -272,7 +272,10 @@ ChangeprofileComponent = __decorate([
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_photo_service__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_user_service__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_photo_service__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_app_auth_service__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__(25);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomeComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -285,18 +288,33 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
+
+
 var HomeComponent = (function () {
-    function HomeComponent(_photoService) {
+    function HomeComponent(_photoService, authService, router, userService) {
         this._photoService = _photoService;
+        this.authService = authService;
+        this.router = router;
+        this.userService = userService;
     }
     HomeComponent.prototype.ngOnInit = function () {
         var _this = this;
+        //get photos
         this._photoService.getPhotos()
             .subscribe(function (response) {
             _this.photos = response;
             console.log(response);
         }, function (error) {
             console.log(error);
+        });
+        //get uer
+        this.userService.getUsers()
+            .subscribe(function (response) {
+            _this.users = response;
+        }, function (err) {
+            console.log(err);
+            return false;
         });
     };
     return HomeComponent;
@@ -308,10 +326,10 @@ HomeComponent = __decorate([
         styles: [__webpack_require__(226)],
         inputs: ['photos']
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_app_photo_service__["a" /* PhotoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_app_photo_service__["a" /* PhotoService */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_app_photo_service__["a" /* PhotoService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_app_photo_service__["a" /* PhotoService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3_app_auth_service__["a" /* AuthService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_app_auth_service__["a" /* AuthService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__angular_router__["b" /* Router */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_app_user_service__["a" /* UserService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_app_user_service__["a" /* UserService */]) === "function" && _d || Object])
 ], HomeComponent);
 
-var _a;
+var _a, _b, _c, _d;
 //# sourceMappingURL=home.component.js.map
 
 /***/ }),
@@ -321,8 +339,8 @@ var _a;
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_auth_service__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_auth_service__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular2_flash_messages__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular2_flash_messages___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angular2_flash_messages__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginComponent; });
@@ -391,11 +409,11 @@ var _a, _b, _c;
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_photo_service__ = __webpack_require__(46);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular2_flash_messages__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular2_flash_messages___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angular2_flash_messages__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_app_auth_service__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_app_validate_service__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_app_auth_service__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_app_validate_service__ = __webpack_require__(64);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PostComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -472,8 +490,8 @@ var _a, _b, _c, _d, _e;
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_auth_service__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_auth_service__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular2_flash_messages__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular2_flash_messages___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angular2_flash_messages__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_app_photo_service__ = __webpack_require__(46);
@@ -548,12 +566,12 @@ var _a, _b, _c, _d;
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_user_service__ = __webpack_require__(91);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_app_validate_service__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_user_service__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_app_validate_service__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angular2_flash_messages__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angular2_flash_messages___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_angular2_flash_messages__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_app_auth_service__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_app_auth_service__ = __webpack_require__(26);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RegisterComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -848,28 +866,28 @@ module.exports = "\n<!-- navbar -->\n   <div class=\"row\" style=\"border-bottom
 /***/ 236:
 /***/ (function(module, exports) {
 
-module.exports = "<!-- navbar -->\n\t\t\t<div class=\"row\" style=\"border-bottom: 1px solid grey \">\n\t\t\t  <div class=\"text-center\">\n\t\t\t  \t<div class=\"col-md-1 col-xs-1\"></div>\n\t\t\t\t<div class=\"col-md-2 col-xs-2\">\n\t\t\t\t\t\t<a routerLink=\"/\"><span class=\"glyphicon glyphicon-home\" style=\"font-size: 25px\"></span></a>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"col-md-2  col-xs-2\">\n\t\t\t\t\t\t<a routerLink=\"/searching-and-explore\"><span class=\"glyphicon glyphicon-search \" style=\"font-size: 25px\"></span></a>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"col-md-2  col-xs-2\">\n\t\t\t\t\t<a routerLink=\"/post\"><span class=\"glyphicon glyphicon-camera\" style=\"font-size: 25px\"></span></a>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"col-md-2  col-xs-2\">\n\t\t\t\t\t\t<a routerLink=#><span class=\"glyphicon glyphicon-heart\" style=\"font-size: 25px\"></span></a>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"col-md-2  col-xs-2\">\n\t\t\t\t\t\t<a routerLink=\"/profile\"><span class=\"glyphicon glyphicon-user\" style=\"font-size: 25px\"></span></a>\n\t\t\t\t</div>\n\t\t\t\t <div class=\"col-md-1 col-xs-1\"></div>\n\t\t\t\t</div>\n\t\t\t </div>\n<!-- /navbar -->\n\n<!-- container -->\n\t<!-- frame of post -->\n\t<ul class=\"nav nav-pills nav-stacked\">\t\n\t\t<li *ngFor=\"let photo of photos\"> \n\t\t\t<div class=\"row\" style=\"padding-top: 30px\">\n\t\t\t\t<div class=\"col-md-4 col-md-offset-4 col-xs-8 col-xs-offset-2\" style=\"border: 1px solid black;\">\n\t\t\t\t\t<div class=\"row\">\n\t\t\t\t\t\t<div class=\"col-md-6\" style=\"padding-top: 10px\">\n\t\t\t\t\t\t\t<img [src]=\"photo.avatar\">\n\t\t\t\t\t\t\t<a routerLink=\"/profile\" style=\"color: black\">nguyentienviet</a>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div class=\"col-md-6 text-right\" style=\"padding-top: 20px\"><p class=\"float-right\" >34m</p></div>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\" row image thumbnail\" style=\"padding-top: 10px;border: none;\">\n\t\t\t\t\t\t<img [src]=\"photo.image_path\" alt=\"\">\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\" status\" style=\"padding-top: 10px\">\n\t\t\t\t\t\t<strong>1 view</strong> <br>\n\t\t\t\t\t\t<a routerLink=\"/profile\" style=\"color: black\"><strong>nguyentienviet</strong></a> que nha toi day\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"comment\" style=\"padding-top: 10px\">\n\t\t\t\t\t\t<i>view comment</i>\t<br>\n\t\t\t\t\t\t<a routerLink=\"/profile\" style=\"color: black\"><strong>tien.thinhvu</strong></a> cho chu dep the\n\t\t\t\t\t\t<br>\n\t\t\t\t\t\t\n\t\t\t\t\t\t<div class=\"your-comment\">\n\t\t\t\t\t\t\t<ul>\n\t\t\t\t\t\t\t\t<li *ngFor=\"let comment of comments\">\n\t\t\t\t\t\t\t\t\t{{comment}}\n\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<i>your comment</i> <br>\n\t\t\t\t\t\t<input style=\"border: none;\"  #newComment\n\t\t\t\t\t\t(keyup.enter)=\"addComment(newComment.value)\"\n     \t\t\t\t\t(blur)=\"addComment(newComment.value); newComment.value =''\"\n\t\t\t\t\t\t>\n\t\t\t\t\t</div>\n\t\t\t\t\t<br>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</li>\n\t</ul>\n\t\t\t\n\t<!-- /frame of post -->\n\n\t\n<!-- container -->\t\n"
+module.exports = "<!-- navbar -->\n\t\t\t<div class=\"row\" style=\"border-bottom: 1px solid grey \">\n\t\t\t  <div class=\"text-center\">\n\t\t\t  \t<div class=\"col-md-1 col-xs-1\"></div>\n\t\t\t\t<div class=\"col-md-2 col-xs-2\">\n\t\t\t\t\t\t<a routerLink=\"/home\"><span class=\"glyphicon glyphicon-home\" style=\"font-size: 25px\"></span></a>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"col-md-2  col-xs-2\">\n\t\t\t\t\t\t<a routerLink=\"/searching-and-explore\"><span class=\"glyphicon glyphicon-search \" style=\"font-size: 25px\"></span></a>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"col-md-2  col-xs-2\">\n\t\t\t\t\t<a routerLink=\"/post\"><span class=\"glyphicon glyphicon-camera\" style=\"font-size: 25px\"></span></a>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"col-md-2  col-xs-2\">\n\t\t\t\t\t\t<a routerLink=#><span class=\"glyphicon glyphicon-heart\" style=\"font-size: 25px\"></span></a>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"col-md-2  col-xs-2\">\n\t\t\t\t\t\t<a routerLink=\"/profile\"><span class=\"glyphicon glyphicon-user\" style=\"font-size: 25px\"></span></a>\n\t\t\t\t</div>\n\t\t\t\t <div class=\"col-md-1 col-xs-1\"></div>\n\t\t\t\t</div>\n\t\t\t </div>\n<!-- /navbar -->\n\n<!-- container -->\n\t<!-- frame of post -->\n\t<ul class=\"nav nav-pills nav-stacked\">\t\n\t\t<li *ngFor=\"let user of users\"> \n\t\t\t<div class=\"row\" style=\"padding-top: 10px\" *ngFor=\"let photo of photos\">\n\t\t\t\t<div class=\"col-md-4 col-md-offset-4 col-xs-8 col-xs-offset-2\" style=\"border: 1px solid black;\" *ngIf=\"user._id == photo.user_id\">\n\t\t\t\t\t<div class=\"row\">\n\t\t\t\t\t\t<div class=\"col-md-6\" style=\"padding-top: 10px\">\n\t\t\t\t\t\t\t<img [src]=\"user.avatar\" class=\"img-circle\" style=\"height: 70px\">\n\t\t\t\t\t\t\t<a routerLink=\"/profile\" style=\"color: black\">{{user.fullname}}</a>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div class=\"col-md-6 text-right\" style=\"padding-top: 20px\"><p class=\"float-right\" >{{photo.date | date:'medium'}}</p></div>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\" row image thumbnail\" style=\"padding-top: 10px;border: none;\">\n\t\t\t\t\t\t<img [src]=\"photo.image_path\" alt=\"\">\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\" status\" style=\"padding-top: 10px\">\n\t\t\t\t\t\t<strong>1 view</strong> <br>\n\t\t\t\t\t\t<a routerLink=\"/profile\" style=\"color: black\"><strong>{{user.fullname}}</strong></a> {{photo.caption}}\n\t\t\t\t\t</div>\n\t\t\t\t<!--\t<div class=\"comment\" style=\"padding-top: 10px\">\n\t\t\t\t\t\t<i>view comment</i>\t<br>\n\t\t\t\t\t\t<a routerLink=\"/profile\" style=\"color: black\"><strong>tien.thinhvu</strong></a> cho chu dep the\n\t\t\t\t\t\t<br>\n\t\t\t\t\t\t<div class=\"your-comment\">\n\t\t\t\t\t\t\t<ul>\n\t\t\t\t\t\t\t\t<li *ngFor=\"let comment of comments\">\n\t\t\t\t\t\t\t\t\t{{comment}}\n\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<i>your comment</i> <br>\n\t\t\t\t\t\t<input style=\"border: none;\"  #newComment\n\t\t\t\t\t\t(keyup.enter)=\"addComment(newComment.value)\"\n     \t\t\t\t\t(blur)=\"addComment(newComment.value); newComment.value =''\"\n\t\t\t\t\t\t>\n\t\t\t\t\t</div> -->\n\t\t\t\t\t<br>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</li>\n\t</ul>\n\t\t\t\n\t<!-- /frame of post -->\n\n\t\n<!-- container -->\t\n"
 
 /***/ }),
 
 /***/ 237:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\" style=\"padding: 70px 0px\">\n\t<!-- navbar -->\n\t<nav id=\"myNavbar\" class=\"navbar navbar-default navbar-inverse navbar-fixed-top\" role=\"navigation\">\n\t\t<!-- Brand and toggle get grouped for better mobile display -->\n\t\t<div class=\"container\">\n\t\t\t<div class=\"navbar-header\">\n\t\t\t\t<button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\"#navbarCollapse\">\n\t\t                <span class=\"sr-only\">Toggle navigation</span>\n\t\t                <span class=\"icon-bar\"></span>\n\t\t                <span class=\"icon-bar\"></span>\n\t\t                <span class=\"icon-bar\"></span>\n\t\t            </button>\n\t\t\t\t<a class=\"navbar-brand\" href=\"#\">Instagram</a>\n\t\t\t</div>\n\t\t\t<!-- Collect the nav links, forms, and other content for toggling -->\n\t\t\t<div class=\"collapse navbar-collapse\" id=\"navbarCollapse\">\n\t\t\t\t<ul class=\"nav navbar-nav\">\n\t\t\t\t\t<li class=\"active\"><a href=\"http://www.tutorialrepublic.com\" target=\"_blank\">Home</a></li>\n\t\t\t\t\t<li><a href=\"http://www.tutorialrepublic.com/about-us.php\" target=\"_blank\">About</a></li>\n\t\t\t\t\t<li><a href=\"http://www.tutorialrepublic.com/contact-us.php\" target=\"_blank\">Contact</a></li>\n\t\t\t\t</ul>\n\t\t\t</div>\n\t\t</div>\n\t</nav>\n\t<!-- /navbar -->\n\n\t<!-- logo + label -->\n\t<div class=\"row\">\n\t\t<h2 class=\"text-center\">Instagram</h2><br>\n\t\t<div class=\"text-center\">\n\t\t\t<a href=\"#>\"><img src=\"https://instagram.fhan4-1.fna.fbcdn.net/t51.2885-19/s150x150/15876016_237940189965257_1575679576548311040_a.jpg\"\n\t\t\t\t alt=\"download appstore\" class=\"img-circle\" width=\"100\" height=\"100\" align=\"center\"></a>\n\t\t</div>\n\t</div>\n\t<!-- /logo + label -->\n\n\t<!-- form -->\n\t<div class=\"row\">\n\t\t<div class=\"col-md-offset-1 col-md-10 col-xs-10 col-xs-offset-1\">\n\t\t\t<form (submit)=\"onLoginSubmit()\">\n\t\t\t\t<div class=\"form-group\">\n\t\t\t\t\t<label>Email</label>\n\t\t\t\t\t<input type=\"text\" class=\"form-control\" placeholder=\"name\" name=\"username\" [(ngModel)]=\"username\">\n\t\t\t\t\t<label>Mật Khẩu</label>\n\t\t\t\t\t<input type=\"password\" class=\"form-control\" placeholder=\"Password\" name=\"userpassword\" [(ngModel)]=\"userpassword\">\n\t\t\t\t</div>\n\t\t\t\t<div class=\"checkbox\">\n\t\t\t\t\t<label><input type=\"checkbox\">REMEMBER</label>\n\t\t\t\t</div>\n\t\t\t\t<br>\n\t\t\t\t<a href=\"#\">FORGET PASSWORD</a>\n\t\t\t\t<br>\n\t\t\t\t<a routerLink=\"/register\">REGISTER</a>\n`\t\t\t\t<br><br>\n\t\t\t\t<div class=\"button\">\n\t\t\t\t\t<button type=\"submit\" class=\"btn btn-primary\" *ngIf=\"!authService.loggedIn()\">LOGIN</button>\n\t\t\t\t</div>\n\t\t\t</form>\n\t\t</div>\n\t</div>\n\t<!-- /form -->\n\t<br><br>\n\t<!-- apple + android -->\n\t<div class=\"row\">\n\t\t<div class=\"download\">\n\t\t\t<div class=\"row\">\n\t\t\t\t<div class=\"text-center\">DOWNLOAD</div>\n\t\t\t\t<div class=\"col-md-12 col-xs-12 text-center\">\n\t\t\t\t\t<a href=\"#>\"><img src=\"https://www.apple.com/ac/structured-data/images/knowledge_graph_logo.png?201701231950\" alt=\"download appstore\"\n\t\t\t\t\t\t class=\"img-circle\" width=\"100\" height=\"100\"></a>\n\t\t\t\t\t<a href=\"#\"><img src=\"https://image.freepik.com/free-vector/android-boot-logo_634639.jpg\" alt=\"download playstore\" class=\"img-circle\"\n\t\t\t\t\t\t width=\"120\" height=\"120\"></a>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n\t<!-- /apple + android -->\n</div>"
+module.exports = "<div class=\"container\" style=\"padding: 70px 0px\">\n\t<!-- navbar -->\n\t<nav id=\"myNavbar\" class=\"navbar navbar-default navbar-inverse navbar-fixed-top\" role=\"navigation\">\n\t\t<!-- Brand and toggle get grouped for better mobile display -->\n\t\t<div class=\"container\">\n\t\t\t<div class=\"navbar-header\">\n\t\t\t\t<button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\"#navbarCollapse\">\n\t\t                <span class=\"sr-only\">Toggle navigation</span>\n\t\t                <span class=\"icon-bar\"></span>\n\t\t                <span class=\"icon-bar\"></span>\n\t\t                <span class=\"icon-bar\"></span>\n\t\t            </button>\n\t\t\t\t<a class=\"navbar-brand\" href=\"#\">Instagram</a>\n\t\t\t</div>\n\t\t\t<!-- Collect the nav links, forms, and other content for toggling -->\n\t\t\t<div class=\"collapse navbar-collapse\" id=\"navbarCollapse\">\n\t\t\t\t<ul class=\"nav navbar-nav\">\n\t\t\t\t\t<li class=\"active\"><a href=\"http://www.tutorialrepublic.com\" target=\"_blank\">Home</a></li>\n\t\t\t\t\t<li><a href=\"http://www.tutorialrepublic.com/about-us.php\" target=\"_blank\">About</a></li>\n\t\t\t\t\t<li><a href=\"http://www.tutorialrepublic.com/contact-us.php\" target=\"_blank\">Contact</a></li>\n\t\t\t\t</ul>\n\t\t\t</div>\n\t\t</div>\n\t</nav>\n\t<!-- /navbar -->\n\n\t<!-- logo + label -->\n\t<div class=\"row\">\n\t\t<h2 class=\"text-center\">Instagram</h2><br>\n\t\t<div class=\"text-center\">\n\t\t\t<a href=\"#>\"><img src=\"https://instagram.fhan4-1.fna.fbcdn.net/t51.2885-19/s150x150/15876016_237940189965257_1575679576548311040_a.jpg\"\n\t\t\t\t alt=\"download appstore\" class=\"img-circle\" width=\"100\" height=\"100\" align=\"center\"></a>\n\t\t</div>\n\t</div>\n\t<!-- /logo + label -->\n\n\t<!-- form -->\n\t<div class=\"row\">\n\t\t<div class=\"col-md-offset-1 col-md-10 col-xs-10 col-xs-offset-1\">\n\t\t\t<form (submit)=\"onLoginSubmit()\">\n\t\t\t\t<div class=\"form-group\">\n\t\t\t\t\t<label>UserName</label>\n\t\t\t\t\t<input type=\"text\" class=\"form-control\" placeholder=\"name\" name=\"username\" [(ngModel)]=\"username\">\n\t\t\t\t\t<label>Mật Khẩu</label>\n\t\t\t\t\t<input type=\"password\" class=\"form-control\" placeholder=\"Password\" name=\"userpassword\" [(ngModel)]=\"userpassword\">\n\t\t\t\t</div>\n\t\t\t\t<div class=\"checkbox\">\n\t\t\t\t\t<label><input type=\"checkbox\">REMEMBER</label>\n\t\t\t\t</div>\n\t\t\t\t<br>\n\t\t\t\t<a href=\"#\">FORGET PASSWORD</a>\n\t\t\t\t<br>\n\t\t\t\t<a routerLink=\"/register\">REGISTER</a>\n`\t\t\t\t<br><br>\n\t\t\t\t<div class=\"button\">\n\t\t\t\t\t<button type=\"submit\" class=\"btn btn-primary\" *ngIf=\"!authService.loggedIn()\">LOGIN</button>\n\t\t\t\t</div>\n\t\t\t</form>\n\t\t</div>\n\t</div>\n\t<!-- /form -->\n\t<br><br>\n\t<!-- apple + android -->\n\t<div class=\"row\">\n\t\t<div class=\"download\">\n\t\t\t<div class=\"row\">\n\t\t\t\t<div class=\"text-center\">DOWNLOAD</div>\n\t\t\t\t<div class=\"col-md-12 col-xs-12 text-center\">\n\t\t\t\t\t<a href=\"#>\"><img src=\"https://www.apple.com/ac/structured-data/images/knowledge_graph_logo.png?201701231950\" alt=\"download appstore\"\n\t\t\t\t\t\t class=\"img-circle\" width=\"100\" height=\"100\"></a>\n\t\t\t\t\t<a href=\"#\"><img src=\"https://image.freepik.com/free-vector/android-boot-logo_634639.jpg\" alt=\"download playstore\" class=\"img-circle\"\n\t\t\t\t\t\t width=\"120\" height=\"120\"></a>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n\t<!-- /apple + android -->\n</div>"
 
 /***/ }),
 
 /***/ 238:
 /***/ (function(module, exports) {
 
-module.exports = "<!-- navbar -->\n<div class=\"row\" style=\"border-bottom: 1px solid grey \">\n\t<div class=\"text-center\">\n\t\t<div class=\"col-md-1 col-xs-1\"></div>\n\t\t<div class=\"col-md-2 col-xs-2\">\n\t\t\t<a routerLink=\"/\"><span class=\"glyphicon glyphicon-home\" style=\"font-size: 25px\"></span></a>\n\t\t</div>\n\t\t<div class=\"col-md-2  col-xs-2\">\n\t\t\t<a routerLink=\"/searching-and-explore\"><span class=\"glyphicon glyphicon-search \" style=\"font-size: 25px\"></span></a>\n\t\t</div>\n\t\t<div class=\"col-md-2  col-xs-2\">\n\t\t\t<a routerLink=\"/post\"><span class=\"glyphicon glyphicon-camera\" style=\"font-size: 25px\"></span></a>\n\t\t</div>\n\t\t<div class=\"col-md-2  col-xs-2\">\n\t\t\t<a routerLink=#><span class=\"glyphicon glyphicon-heart\" style=\"font-size: 25px\"></span></a>\n\t\t</div>\n\t\t<div class=\"col-md-2  col-xs-2\">\n\t\t\t<a routerLink=\"/profile\"><span class=\"glyphicon glyphicon-user\" style=\"font-size: 25px\"></span></a>\n\t\t</div>\n\t\t<div class=\"col-md-1 col-xs-1\"></div>\n\t</div>\n</div>\n<!-- /navbar -->\n<div class=\"container\">\n\t<div class=\"row\">\n\t\t<div class=\"jumbotron\">\n\t\t\tPOST YOUR PHOTOS HERE !\n\t\t</div>\n\t\t<form #form=\"ngForm\" class=\"well\" (submit)=\"onPostSubmitPhoto()\">\n\t\t\t<div class=\"form-group\">\n\t\t\t\t<label>LINK YOUR IMAGE</label>\n\t\t\t\t<input type=\"text\" class=\"form-control\" name=\"image_path\" [(ngModel)]=\"image_path\">\n\t\t\t</div>\n\t\t\t<div class=\"form-group\" *ngIf=\"hidden\">\n\t\t\t\t<label>USER ID</label>\n\t\t\t\t<input type=\"text\" class=\"form-control\" name=\"user_id\" [(ngModel)]=\"user_id\">\n\t\t\t</div>\n\t\t\t<div class=\"form-group\" *ngIf=\"hidden\">\n\t\t\t\t<label>date_create</label>\n\t\t\t\t<input type=\"text\" class=\"form-control\" name=\"date\" [(ngModel)]=\"date\">\n\t\t\t</div>\n\t\t\t<div class=\"form-group\" >\n\t\t\t\t<label for=\"comment\">CAPTION:</label>\n\t\t\t\t<textarea class=\"form-control\" rows=\"5\" name=\"caption\" [(ngModel)]=\"caption\"></textarea>\n\t\t\t</div>\n\t\t\t<button type=\"submit\" class=\"btn btn-default\">Submit</button>\n\t\t\t<button type=\"button\" class=\"btn btn-default\" (click)=\"goToHomePage()\">Cancel</button>\n\t\t</form>\n\t</div>\n</div>"
+module.exports = "<!-- navbar -->\n<div class=\"row\" style=\"border-bottom: 1px solid grey \">\n\t<div class=\"text-center\">\n\t\t<div class=\"col-md-1 col-xs-1\"></div>\n\t\t<div class=\"col-md-2 col-xs-2\">\n\t\t\t<a routerLink=\"/home\"><span class=\"glyphicon glyphicon-home\" style=\"font-size: 25px\"></span></a>\n\t\t</div>\n\t\t<div class=\"col-md-2  col-xs-2\">\n\t\t\t<a routerLink=\"/searching-and-explore\"><span class=\"glyphicon glyphicon-search \" style=\"font-size: 25px\"></span></a>\n\t\t</div>\n\t\t<div class=\"col-md-2  col-xs-2\">\n\t\t\t<a routerLink=\"/post\"><span class=\"glyphicon glyphicon-camera\" style=\"font-size: 25px\"></span></a>\n\t\t</div>\n\t\t<div class=\"col-md-2  col-xs-2\">\n\t\t\t<a routerLink=#><span class=\"glyphicon glyphicon-heart\" style=\"font-size: 25px\"></span></a>\n\t\t</div>\n\t\t<div class=\"col-md-2  col-xs-2\">\n\t\t\t<a routerLink=\"/profile\"><span class=\"glyphicon glyphicon-user\" style=\"font-size: 25px\"></span></a>\n\t\t</div>\n\t\t<div class=\"col-md-1 col-xs-1\"></div>\n\t</div>\n</div>\n<!-- /navbar -->\n<div class=\"container\">\n\t<div class=\"row\">\n\t\t<div class=\"jumbotron\">\n\t\t\tPOST YOUR PHOTOS HERE !\n\t\t</div>\n\t\t<form #form=\"ngForm\" class=\"well\" (submit)=\"onPostSubmitPhoto()\">\n\t\t\t<div class=\"form-group\">\n\t\t\t\t<label>LINK YOUR IMAGE</label>\n\t\t\t\t<input type=\"text\" class=\"form-control\" name=\"image_path\" [(ngModel)]=\"image_path\">\n\t\t\t</div>\n\t\t\t<div class=\"form-group\" *ngIf=\"hidden\">\n\t\t\t\t<label>USER ID</label>\n\t\t\t\t<input type=\"text\" class=\"form-control\" name=\"user_id\" [(ngModel)]=\"user_id\">\n\t\t\t</div>\n\t\t\t<div class=\"form-group\" *ngIf=\"hidden\">\n\t\t\t\t<label>date_create</label>\n\t\t\t\t<input type=\"text\" class=\"form-control\" name=\"date\" [(ngModel)]=\"date\">\n\t\t\t</div>\n\t\t\t<div class=\"form-group\" >\n\t\t\t\t<label for=\"comment\">CAPTION:</label>\n\t\t\t\t<textarea class=\"form-control\" rows=\"5\" name=\"caption\" [(ngModel)]=\"caption\"></textarea>\n\t\t\t</div>\n\t\t\t<button type=\"submit\" class=\"btn btn-default\">Submit</button>\n\t\t\t<button type=\"button\" class=\"btn btn-default\" (click)=\"goToHomePage()\">Cancel</button>\n\t\t</form>\n\t</div>\n</div>"
 
 /***/ }),
 
 /***/ 239:
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"user\">\n\t<!-- navbar -->\n\t<div class=\"row\" style=\"border-bottom: 1px solid grey \">\n\t\t<div class=\"text-center\">\n\t\t\t<div class=\"col-md-1 col-xs-1\"></div>\n\t\t\t<div class=\"col-md-2 col-xs-2\">\n\t\t\t\t<a routerLink=\"\"><span class=\"glyphicon glyphicon-home\" style=\"font-size: 25px\"></span></a>\n\t\t\t</div>\n\t\t\t<div class=\"col-md-2  col-xs-2\">\n\t\t\t\t<a routerLink=\"/searching-and-explore\"><span class=\"glyphicon glyphicon-search \" style=\"font-size: 25px\"></span></a>\n\t\t\t</div>\n\t\t\t<div class=\"col-md-2  col-xs-2\">\n\t\t\t\t<a routerLink=\"/post\"><span class=\"glyphicon glyphicon-camera\" style=\"font-size: 25px\"></span></a>\n\t\t\t</div>\n\t\t\t<div class=\"col-md-2  col-xs-2\">\n\t\t\t\t<a href=\"#\"><span class=\"glyphicon glyphicon-heart\" style=\"font-size: 25px\"></span></a>\n\t\t\t</div>\n\t\t\t<div class=\"col-md-2  col-xs-2\">\n\t\t\t\t<a routerLink=\"/profile\"><span class=\"glyphicon glyphicon-user\" style=\"font-size: 25px\"></span></a>\n\t\t\t</div>\n\t\t\t<div class=\"col-md-1 col-xs-1\"></div>\n\t\t</div>\n\t</div>\n\t<!-- /navbar -->\n\t<!-- container -->\n\t<!-- information -->\n\t<div class=\"row\" style=\"padding-top: 80px\">\n\t\t<div id=\"information\" class=\"col-md-12\">\n\t\t\t<div class=\"col-md-1 col-md-offset-3 col-xs-1 col-md-offset-3 thumbnail\" id=\"image\" style=\"border: none\">\n\t\t\t\t<img [src]=\"user.avatar\"\n\t\t\t\t alt=\"anhdaidien\" class=\"img-circle\">\n\t\t\t</div>\n\t\t\t<div class=\"col-md-8 col-xs-8\" id=\"information\">\n\t\t\t\t<div class=\"row\">\n\t\t\t\t\t<span style=\"font-size: 40px\">{{user.fullname}}</span><a routerLink=\"/changeprofile\">. CHANGE PROFILE</a> <a (click)=\"onLogoutClick()\"\n\t\t\t\t\t routerLink=\"#\">Logout</a>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"row\" style=\"font-size: 20px;padding-top: 10px;padding-bottom: 10px\">\n\t\t\t\t\t<div class=\"col-md-3 col-xs-3\"><strong>16</strong> POST</div>\n\t\t\t\t\t<div class=\"col-md-4 col-xs-4\"><strong>79</strong> FOLLOWER</div>\n\t\t\t\t\t<div class=\"col-md-5 col-md-5\">FOLLOWING <strong>43 </strong></div>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"row\" style=\"font-size: 20px;padding-top: 40px;padding-bottom: 10px\">\n\t\t\t\t\t{{user.fullname}}, {{user.personal_information}}\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n\t<!-- /information -->\n\n\t<!-- image frame -->\n\t<div class=\"container\">\n\t\t<ul id=\"image\" style=\"padding-top: 100px\" class=\"col-md-12\">\n\t\t\t<li *ngFor=\"let photo of photos\" >\n\t\t\t\t<div  class=\"col-md-2 thumbnail\" style=\"border: solid;padding: 5px; margin: 5px\"><img [src]=\"photo.image_path\"></div>\n\t\t\t</li>\n\t\t</ul>\n\t</div>\n\t<!-- /image frame -->\n\t<!-- /container -->\n</div>"
+module.exports = "<div *ngIf=\"user\">\n\t<!-- navbar -->\n\t<div class=\"row\" style=\"border-bottom: 1px solid grey \">\n\t\t<div class=\"text-center\">\n\t\t\t<div class=\"col-md-1 col-xs-1\"></div>\n\t\t\t<div class=\"col-md-2 col-xs-2\">\n\t\t\t\t<a routerLink=\"/home\"><span class=\"glyphicon glyphicon-home\" style=\"font-size: 25px\"></span></a>\n\t\t\t</div>\n\t\t\t<div class=\"col-md-2  col-xs-2\">\n\t\t\t\t<a routerLink=\"/searching-and-explore\"><span class=\"glyphicon glyphicon-search \" style=\"font-size: 25px\"></span></a>\n\t\t\t</div>\n\t\t\t<div class=\"col-md-2  col-xs-2\">\n\t\t\t\t<a routerLink=\"/post\"><span class=\"glyphicon glyphicon-camera\" style=\"font-size: 25px\"></span></a>\n\t\t\t</div>\n\t\t\t<div class=\"col-md-2  col-xs-2\">\n\t\t\t\t<a href=\"#\"><span class=\"glyphicon glyphicon-heart\" style=\"font-size: 25px\"></span></a>\n\t\t\t</div>\n\t\t\t<div class=\"col-md-2  col-xs-2\">\n\t\t\t\t<a routerLink=\"/profile\"><span class=\"glyphicon glyphicon-user\" style=\"font-size: 25px\"></span></a>\n\t\t\t</div>\n\t\t\t<div class=\"col-md-1 col-xs-1\"></div>\n\t\t</div>\n\t</div>\n\t<!-- /navbar -->\n\t<!-- container -->\n\t<!-- information -->\n\t<div class=\"row\" style=\"padding-top: 80px\">\n\t\t<div id=\"information\" class=\"col-md-12\">\n\t\t\t<div class=\"col-md-1 col-md-offset-3 col-xs-1 col-md-offset-3 thumbnail\" id=\"image\" style=\"border: none\">\n\t\t\t\t<img [src]=\"user.avatar\"\n\t\t\t\t alt=\"anhdaidien\" class=\"img-circle\">\n\t\t\t</div>\n\t\t\t<div class=\"col-md-8 col-xs-8\" id=\"information\">\n\t\t\t\t<div class=\"row\">\n\t\t\t\t\t<span style=\"font-size: 40px\">{{user.fullname}}</span><a routerLink=\"/changeprofile\">. CHANGE PROFILE</a> <a (click)=\"onLogoutClick()\"\n\t\t\t\t\t routerLink=\"#\">Logout</a>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"row\" style=\"font-size: 20px;padding-top: 10px;padding-bottom: 10px\">\n\t\t\t\t\t<div class=\"col-md-3 col-xs-3\"><strong>16</strong> POST</div>\n\t\t\t\t\t<div class=\"col-md-4 col-xs-4\"><strong>79</strong> FOLLOWER</div>\n\t\t\t\t\t<div class=\"col-md-5 col-md-5\">FOLLOWING <strong>43 </strong></div>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"row\" style=\"font-size: 20px;padding-top: 40px;padding-bottom: 10px\">\n\t\t\t\t\t{{user.fullname}}, {{user.personal_information}}\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n\t<!-- /information -->\n\n\t<!-- image frame -->\n\t<div class=\"container\">\n\t\t<ul id=\"image\" style=\"padding-top: 100px\" class=\"col-md-12\">\n\t\t\t<li *ngFor=\"let photo of photos\" style=\"list-style-type: none\">\n\t\t\t\t<div  *ngIf=\"photo.user_id == user._id\" class=\"col-md-2 thumbnail\" style=\"border: solid;padding: 5px; margin: 5px; height: 300px; width: 300px\"><img [src]=\"photo.image_path\"></div>\n\t\t\t</li>\n\t\t</ul>\n\t</div>\n\t<!-- /image frame -->\n\t<!-- /container -->\n</div>"
 
 /***/ }),
 
@@ -883,11 +901,11 @@ module.exports = "<div class=\"container\">\n  <h2 class=\"page-header\">Registe
 /***/ 241:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n\t\t\t<div class=\"row\" style=\"border-bottom: 1px solid grey \">\n\t\t\t  <div class=\"text-center\">\n\t\t\t  \t<div class=\"col-md-1 col-xs-1\"></div>\n\t\t\t\t<div class=\"col-md-2 col-xs-2\">\n\t\t\t\t\t<a routerLink=\"\"><span class=\"glyphicon glyphicon-home\" style=\"font-size: 25px\"></span></a>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"col-md-2  col-xs-2\">\n\t\t\t\t\t<a routerLink=\"/searching-and-explore\"><span class=\"glyphicon glyphicon-search \" style=\"font-size: 25px\"></span></a>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"col-md-2  col-xs-2\">\n\t\t\t\t\t<a href=\"\"><span class=\"glyphicon glyphicon-camera\" style=\"font-size: 25px\"></span></a>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"col-md-2  col-xs-2\">\n\t\t\t\t\t<a href=\"\"><span class=\"glyphicon glyphicon-heart\" style=\"font-size: 25px\"></span></a>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"col-md-2  col-xs-2\">\n\t\t\t\t\t<a routerLink=\"/profile\"><span class=\"glyphicon glyphicon-user\" style=\"font-size: 25px\"></span></a>\n\t\t\t\t</div>\n\t\t\t\t <div class=\"col-md-1 col-xs-1\"></div>\n\t\t\t\t</div>\n\t\t\t </div>\n\n\t\t\t<div class=\"row\">\n\t\t\t\t<div class=\"form-group\">\n\t\t\t\t  <label for=\"usr\">Search:</label>\n\t\t\t\t  <input type=\"text\" class=\"form-control\" id=\"usr\">\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t\t<div class=\"row\"> <!--explore-->\n\t\t\t\t<div class=\"row\"> <!---ROW 1 -->\n\t\t\t\t\t<div class=\"col-md-4\">\n\t\t\t\t\t\t<a href=\"#\" class=\"img-circle\">\n\t\t\t\t\t\t\t<img id=\"_imgArticle_0\" class=\"img-responsive img-circle\" title=\"NoSQL là gì? Tại sao cần quan tâm?\" src=\"http://eva-img.24hstatic.com/upload/2-2016/images/2016-05-26/lee-min-ho-bi-su-dung-hinh-anh-trai-phep-de-lua-dao-25-ty-3-1464249930-width1000height750.jpg\" />\n\t\t\t\t\t\t\t<p class=\"text-center \">LeeMinHo</p>\n\t\t\t\t\t\t</a>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"col-md-4\">\n\t\t\t\t\t\t<a href=\"#\" >\n\t\t\t\t\t\t\t<img id=\"_imgArticle_0\" class=\"img-responsive img-circle\" title=\"NoSQL là gì? Tại sao cần quan tâm?\" src=\"https://dantricdn.com/k:2016/torres1-1463549649780/torres-loi-hen-voi-euro-2016-nuoc-mat-ke-ngoai-cuoc.jpg\"/>\n\t\t\t\t\t\t\t<p class=\"text-center \">Torres Fernando</p>\n\t\t\t\t\t\t</a>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"col-md-4\">\n\t\t\t\t\t\t<a href=\"#\" >\n\t\t\t\t\t\t\t<img id=\"_imgArticle_0\" class=\"img-responsive img-circle\" title=\"NoSQL là gì? Tại sao cần quan tâm?\" src=\"http://enternews.vn/wp-content/uploads/2017/01/Mark-Zuckerberg.jpg\" />\n\n\n\t\t\t\t\t\t\t<p class=\"text-center \">Markzugkerberg</p>\n\t\t\t\t\t\t</a>\n\t\t\t\t\t</div>\n\n\n\t\t\t\t</div>\n\t\t\t\t<div class=\"row\"> <!---ROW 2 -->\n\t\t\t\t\t<div class=\"col-md-4\">\n\t\t\t\t\t\t<a href=\"#\" class=\"img-circle\">\n\t\t\t\t\t\t\t<img id=\"_imgArticle_0\" class=\"img-responsive img-circle\" title=\"NoSQL là gì? Tại sao cần quan tâm?\" src=\"http://eva-img.24hstatic.com/upload/2-2016/images/2016-05-26/lee-min-ho-bi-su-dung-hinh-anh-trai-phep-de-lua-dao-25-ty-3-1464249930-width1000height750.jpg\" />\n\t\t\t\t\t\t\t<p class=\"text-center \">LeeMinHo</p>\n\t\t\t\t\t\t</a>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"col-md-4\">\n\t\t\t\t\t\t<a href=\"#\" >\n\t\t\t\t\t\t\t<img id=\"_imgArticle_0\" class=\"img-responsive img-circle\" title=\"NoSQL là gì? Tại sao cần quan tâm?\" src=\"https://dantricdn.com/k:2016/torres1-1463549649780/torres-loi-hen-voi-euro-2016-nuoc-mat-ke-ngoai-cuoc.jpg\"/>\n\t\t\t\t\t\t\t<p class=\"text-center \">Torres Fernando</p>\n\t\t\t\t\t\t</a>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"col-md-4\">\n\t\t\t\t\t\t<a href=\"#\" >\n\t\t\t\t\t\t\t<img id=\"_imgArticle_0\" class=\"img-responsive img-circle\" title=\"NoSQL là gì? Tại sao cần quan tâm?\" src=\"http://enternews.vn/wp-content/uploads/2017/01/Mark-Zuckerberg.jpg\" />\n\n\n\t\t\t\t\t\t\t<p class=\"text-center \">Markzugkerberg</p>\n\t\t\t\t\t\t</a>\n\t\t\t\t\t</div>\n\n\t\t\t\t\t\n\t\t\t\t</div>\n\t\t\t\t<div class=\"row\"> <!---ROW 3 -->\n\t\t\t\t\t<div class=\"col-md-4\">\n\t\t\t\t\t\t<a href=\"#\" class=\"img-circle\">\n\t\t\t\t\t\t\t<img id=\"_imgArticle_0\" class=\"img-responsive img-circle\" title=\"NoSQL là gì? Tại sao cần quan tâm?\" src=\"http://eva-img.24hstatic.com/upload/2-2016/images/2016-05-26/lee-min-ho-bi-su-dung-hinh-anh-trai-phep-de-lua-dao-25-ty-3-1464249930-width1000height750.jpg\" />\n\t\t\t\t\t\t\t<p class=\"text-center \">LeeMinHo</p>\n\t\t\t\t\t\t</a>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"col-md-4\">\n\t\t\t\t\t\t<a href=\"#\" >\n\t\t\t\t\t\t\t<img id=\"_imgArticle_0\" class=\"img-responsive img-circle\" title=\"NoSQL là gì? Tại sao cần quan tâm?\" src=\"https://dantricdn.com/k:2016/torres1-1463549649780/torres-loi-hen-voi-euro-2016-nuoc-mat-ke-ngoai-cuoc.jpg\"/>\n\t\t\t\t\t\t\t<p class=\"text-center \">Torres Fernando</p>\n\t\t\t\t\t\t</a>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"col-md-4\">\n\t\t\t\t\t\t<a href=\"#\" >\n\t\t\t\t\t\t\t<img id=\"_imgArticle_0\" class=\"img-responsive img-circle\" title=\"NoSQL là gì? Tại sao cần quan tâm?\" src=\"http://enternews.vn/wp-content/uploads/2017/01/Mark-Zuckerberg.jpg\" />\n\n\n\t\t\t\t\t\t\t<p class=\"text-center \">Markzugkerberg</p>\n\t\t\t\t\t\t</a>\n\t\t\t\t\t</div>\n\n\t\t\t\t\t\n\t\t\t\t</div>\n\t\t\t</div>\n\t</div>"
+module.exports = "<div class=\"container\">\n\t\t\t<div class=\"row\" style=\"border-bottom: 1px solid grey \">\n\t\t\t  <div class=\"text-center\">\n\t\t\t  \t<div class=\"col-md-1 col-xs-1\"></div>\n\t\t\t\t<div class=\"col-md-2 col-xs-2\">\n\t\t\t\t\t<a routerLink=\"/home\"><span class=\"glyphicon glyphicon-home\" style=\"font-size: 25px\"></span></a>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"col-md-2  col-xs-2\">\n\t\t\t\t\t<a routerLink=\"/searching-and-explore\"><span class=\"glyphicon glyphicon-search \" style=\"font-size: 25px\"></span></a>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"col-md-2  col-xs-2\">\n\t\t\t\t\t<a href=\"\"><span class=\"glyphicon glyphicon-camera\" style=\"font-size: 25px\"></span></a>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"col-md-2  col-xs-2\">\n\t\t\t\t\t<a href=\"\"><span class=\"glyphicon glyphicon-heart\" style=\"font-size: 25px\"></span></a>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"col-md-2  col-xs-2\">\n\t\t\t\t\t<a routerLink=\"/profile\"><span class=\"glyphicon glyphicon-user\" style=\"font-size: 25px\"></span></a>\n\t\t\t\t</div>\n\t\t\t\t <div class=\"col-md-1 col-xs-1\"></div>\n\t\t\t\t</div>\n\t\t\t </div>\n\n\t\t\t<div class=\"row\">\n\t\t\t\t<div class=\"form-group\">\n\t\t\t\t  <label for=\"usr\">Search:</label>\n\t\t\t\t  <input type=\"text\" class=\"form-control\" id=\"usr\">\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t\t<div class=\"row\"> <!--explore-->\n\t\t\t\t<div class=\"row\"> <!---ROW 1 -->\n\t\t\t\t\t<div class=\"col-md-4\">\n\t\t\t\t\t\t<a href=\"#\" class=\"img-circle\">\n\t\t\t\t\t\t\t<img id=\"_imgArticle_0\" class=\"img-responsive img-circle\" title=\"NoSQL là gì? Tại sao cần quan tâm?\" src=\"http://eva-img.24hstatic.com/upload/2-2016/images/2016-05-26/lee-min-ho-bi-su-dung-hinh-anh-trai-phep-de-lua-dao-25-ty-3-1464249930-width1000height750.jpg\" />\n\t\t\t\t\t\t\t<p class=\"text-center \">LeeMinHo</p>\n\t\t\t\t\t\t</a>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"col-md-4\">\n\t\t\t\t\t\t<a href=\"#\" >\n\t\t\t\t\t\t\t<img id=\"_imgArticle_0\" class=\"img-responsive img-circle\" title=\"NoSQL là gì? Tại sao cần quan tâm?\" src=\"https://dantricdn.com/k:2016/torres1-1463549649780/torres-loi-hen-voi-euro-2016-nuoc-mat-ke-ngoai-cuoc.jpg\"/>\n\t\t\t\t\t\t\t<p class=\"text-center \">Torres Fernando</p>\n\t\t\t\t\t\t</a>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"col-md-4\">\n\t\t\t\t\t\t<a href=\"#\" >\n\t\t\t\t\t\t\t<img id=\"_imgArticle_0\" class=\"img-responsive img-circle\" title=\"NoSQL là gì? Tại sao cần quan tâm?\" src=\"http://enternews.vn/wp-content/uploads/2017/01/Mark-Zuckerberg.jpg\" />\n\n\n\t\t\t\t\t\t\t<p class=\"text-center \">Markzugkerberg</p>\n\t\t\t\t\t\t</a>\n\t\t\t\t\t</div>\n\n\n\t\t\t\t</div>\n\t\t\t\t<div class=\"row\"> <!---ROW 2 -->\n\t\t\t\t\t<div class=\"col-md-4\">\n\t\t\t\t\t\t<a href=\"#\" class=\"img-circle\">\n\t\t\t\t\t\t\t<img id=\"_imgArticle_0\" class=\"img-responsive img-circle\" title=\"NoSQL là gì? Tại sao cần quan tâm?\" src=\"http://eva-img.24hstatic.com/upload/2-2016/images/2016-05-26/lee-min-ho-bi-su-dung-hinh-anh-trai-phep-de-lua-dao-25-ty-3-1464249930-width1000height750.jpg\" />\n\t\t\t\t\t\t\t<p class=\"text-center \">LeeMinHo</p>\n\t\t\t\t\t\t</a>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"col-md-4\">\n\t\t\t\t\t\t<a href=\"#\" >\n\t\t\t\t\t\t\t<img id=\"_imgArticle_0\" class=\"img-responsive img-circle\" title=\"NoSQL là gì? Tại sao cần quan tâm?\" src=\"https://dantricdn.com/k:2016/torres1-1463549649780/torres-loi-hen-voi-euro-2016-nuoc-mat-ke-ngoai-cuoc.jpg\"/>\n\t\t\t\t\t\t\t<p class=\"text-center \">Torres Fernando</p>\n\t\t\t\t\t\t</a>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"col-md-4\">\n\t\t\t\t\t\t<a href=\"#\" >\n\t\t\t\t\t\t\t<img id=\"_imgArticle_0\" class=\"img-responsive img-circle\" title=\"NoSQL là gì? Tại sao cần quan tâm?\" src=\"http://enternews.vn/wp-content/uploads/2017/01/Mark-Zuckerberg.jpg\" />\n\n\n\t\t\t\t\t\t\t<p class=\"text-center \">Markzugkerberg</p>\n\t\t\t\t\t\t</a>\n\t\t\t\t\t</div>\n\n\t\t\t\t\t\n\t\t\t\t</div>\n\t\t\t\t<div class=\"row\"> <!---ROW 3 -->\n\t\t\t\t\t<div class=\"col-md-4\">\n\t\t\t\t\t\t<a href=\"#\" class=\"img-circle\">\n\t\t\t\t\t\t\t<img id=\"_imgArticle_0\" class=\"img-responsive img-circle\" title=\"NoSQL là gì? Tại sao cần quan tâm?\" src=\"http://eva-img.24hstatic.com/upload/2-2016/images/2016-05-26/lee-min-ho-bi-su-dung-hinh-anh-trai-phep-de-lua-dao-25-ty-3-1464249930-width1000height750.jpg\" />\n\t\t\t\t\t\t\t<p class=\"text-center \">LeeMinHo</p>\n\t\t\t\t\t\t</a>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"col-md-4\">\n\t\t\t\t\t\t<a href=\"#\" >\n\t\t\t\t\t\t\t<img id=\"_imgArticle_0\" class=\"img-responsive img-circle\" title=\"NoSQL là gì? Tại sao cần quan tâm?\" src=\"https://dantricdn.com/k:2016/torres1-1463549649780/torres-loi-hen-voi-euro-2016-nuoc-mat-ke-ngoai-cuoc.jpg\"/>\n\t\t\t\t\t\t\t<p class=\"text-center \">Torres Fernando</p>\n\t\t\t\t\t\t</a>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"col-md-4\">\n\t\t\t\t\t\t<a href=\"#\" >\n\t\t\t\t\t\t\t<img id=\"_imgArticle_0\" class=\"img-responsive img-circle\" title=\"NoSQL là gì? Tại sao cần quan tâm?\" src=\"http://enternews.vn/wp-content/uploads/2017/01/Mark-Zuckerberg.jpg\" />\n\n\n\t\t\t\t\t\t\t<p class=\"text-center \">Markzugkerberg</p>\n\t\t\t\t\t\t</a>\n\t\t\t\t\t</div>\n\n\t\t\t\t\t\n\t\t\t\t</div>\n\t\t\t</div>\n\t</div>"
 
 /***/ }),
 
-/***/ 28:
+/***/ 26:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1054,56 +1072,6 @@ module.exports = __webpack_require__(147);
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(5);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ValidateService; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var ValidateService = (function () {
-    function ValidateService() {
-    }
-    ValidateService.prototype.validateRegister = function (user) {
-        if (user.username == undefined || user.useremail == undefined || user.userpassword == undefined || user.fullname == undefined || user.nickname == undefined || user.phone == undefined || user.personal_information == undefined) {
-            return false;
-        }
-        else {
-            return true;
-        }
-    };
-    ValidateService.prototype.validateEmail = function (email) {
-        var re = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-        return re.test(email);
-    };
-    ValidateService.prototype.validatePostPhoto = function (photo) {
-        if (photo.caption == undefined || photo.image_path == undefined) {
-            return false;
-        }
-        else {
-            return true;
-        }
-    };
-    return ValidateService;
-}());
-ValidateService = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
-    __metadata("design:paramtypes", [])
-], ValidateService);
-
-//# sourceMappingURL=validate.service.js.map
-
-/***/ }),
-
-/***/ 91:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
@@ -1177,6 +1145,56 @@ UserService = __decorate([
 
 var _a;
 //# sourceMappingURL=user.service.js.map
+
+/***/ }),
+
+/***/ 64:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(5);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ValidateService; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var ValidateService = (function () {
+    function ValidateService() {
+    }
+    ValidateService.prototype.validateRegister = function (user) {
+        if (user.username == undefined || user.useremail == undefined || user.userpassword == undefined || user.fullname == undefined || user.nickname == undefined || user.phone == undefined || user.personal_information == undefined) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    };
+    ValidateService.prototype.validateEmail = function (email) {
+        var re = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+        return re.test(email);
+    };
+    ValidateService.prototype.validatePostPhoto = function (photo) {
+        if (photo.caption == undefined || photo.image_path == undefined) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    };
+    return ValidateService;
+}());
+ValidateService = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+    __metadata("design:paramtypes", [])
+], ValidateService);
+
+//# sourceMappingURL=validate.service.js.map
 
 /***/ })
 

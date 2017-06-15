@@ -4,7 +4,7 @@
 		<div class="text-center">
 			<div class="col-md-1 col-xs-1"></div>
 			<div class="col-md-2 col-xs-2">
-				<a routerLink=""><span class="glyphicon glyphicon-home" style="font-size: 25px"></span></a>
+				<a routerLink="/home"><span class="glyphicon glyphicon-home" style="font-size: 25px"></span></a>
 			</div>
 			<div class="col-md-2  col-xs-2">
 				<a routerLink="/searching-and-explore"><span class="glyphicon glyphicon-search " style="font-size: 25px"></span></a>
@@ -51,8 +51,8 @@
 	<!-- image frame -->
 	<div class="container">
 		<ul id="image" style="padding-top: 100px" class="col-md-12">
-			<li *ngFor="let photo of photos" >
-				<div  class="col-md-2 thumbnail" style="border: solid;padding: 5px; margin: 5px"><img [src]="photo.image_path"></div>
+			<li *ngFor="let photo of photos" style="list-style-type: none">
+				<div  *ngIf="photo.user_id == user._id" class="col-md-2 thumbnail" style="border: solid;padding: 5px; margin: 5px; height: 300px; width: 300px"><img [src]="photo.image_path"></div>
 			</li>
 		</ul>
 	</div>
