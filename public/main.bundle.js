@@ -628,7 +628,7 @@ var RegisterComponent = (function () {
                 _this.router.navigate(['/']);
             }
             else {
-                _this.flashMessagesService.show('something went wrong', { cssClass: 'alert-danger', timeout: 3000 });
+                _this.flashMessagesService.show('username has created', { cssClass: 'alert-danger', timeout: 3000 });
             }
         });
     };

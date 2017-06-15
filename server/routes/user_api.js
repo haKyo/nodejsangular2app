@@ -41,26 +41,31 @@ router.get('/users/:id', function (req, res) {
 // register
 router.post('/register', function (req, res, next) {
     console.log('post a user');
+       const username = req.body.username;
     var newUser = new User({
-       username : req.body.username,
-    userpassword : req.body.userpassword,
-   useremail : req.body.useremail,
-   gender : req.body.gender,
-    personal_information : req.body.personal_information,
-    nickname : req.body.nickname,
-phone : req.body.phone,
-    fullname : req.body.fullname,
-    avatar: req.body.avatar
+        username: req.body.username,
+        userpassword: req.body.userpassword,
+        useremail: req.body.useremail,
+        gender: req.body.gender,
+        personal_information: req.body.personal_information,
+        nickname: req.body.nickname,
+        phone: req.body.phone,
+        fullname: req.body.fullname,
+        avatar: req.body.avatar
     });
-   
-    
-    User.addUser(newUser, function (err, user) {
-        if (err) {
-            res.json({ success: false, msg: 'failed to register user' });
-        } else {
-            res.json({ success: true, msg: 'success to register user' });
-        }
-    })
+    User.getUserByUsername(username, function (err, user) {
+        if (err) throw err;
+        if (user) {
+            return res.json({ success: false, msg: 'user has existed' });
+        };
+        User.addUser(newUser, function (err, user) {
+            if (err) {
+                res.json({ success: false, msg: 'failed to register user' });
+            } else {
+                res.json({ success: true, msg: 'success to register user' });
+            }
+        });
+    });
 });
 
 // authenticate
@@ -103,7 +108,7 @@ router.post('/authen', (req, res, next) => {
 
 //profile
 router.get('/profile', passport.authenticate('jwt', { session: false }), (req, res, next) => {
-    res.json({user: req.user});
+    res.json({ user: req.user });
 });
 
 // update user into database
